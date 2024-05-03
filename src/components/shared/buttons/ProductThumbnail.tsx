@@ -1,4 +1,4 @@
-import { ImageDTO } from "../../layout/ProductPicture";
+import { ImageDTO } from "../../layout/ProductImage";
 
 interface Props {
   image: ImageDTO;
@@ -10,15 +10,21 @@ interface Props {
 function ProductThumbnail(props: Props) {
   return (
     <>
-      <img
-        src={props.image.image.small.url}
-        className={`cursor-pointer rounded hover:opacity-65 box-border border-2 size-20 ${
+      <div
+        className={`cursor-pointer rounded size-20 box-border bg-[white] ${
           props.selectedPicture.id === props.image.id
-            ? "border-orange opacity-45"
-            : "border-transparent"
+            ? "shadow-[0_0_0_3px_orange] box-border"
+            : "border-0"
         } `}
-        onClick={() => props.handlePicture(props.image)}
-      />
+      >
+        <img
+          src={props.image.image.small.url}
+          className={`rounded hover:opacity-65 box-border size-full ${
+            props.selectedPicture.id === props.image.id && "opacity-65"
+          } `}
+          onClick={() => props.handlePicture(props.image)}
+        />
+      </div>
     </>
   );
 }

@@ -24,11 +24,11 @@ function Nav() {
         <div className="flex flex-row">
           <img
             className="inline object-scale-down mx-8"
-            src="images\icon-cart.svg"
+            src="./images/icon-cart.svg"
           />
           <img
             className="object-scale-down size-12"
-            src="images\image-avatar.png"
+            src="./images/image-avatar.png"
           />
         </div>
       </div>
