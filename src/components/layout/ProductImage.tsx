@@ -1,5 +1,8 @@
 import { useState } from "react";
 import ProductThumbnail from "../shared/buttons/ProductThumbnail";
+import NextButton from "../shared/buttons/NextButton";
+import PreviousButton from "../shared/buttons/PreviousButton";
+import CloseButton from "../shared/buttons/CloseButton";
 
 interface LinkDTO {
   id: string;
@@ -70,6 +73,22 @@ function ProductImageGallery(props: any) {
     event.stopPropagation();
   };
 
+  const handleNext = () => {
+    if (selectedImage.id === "4") {
+      setSelectedImage(productImages[0]);
+    } else {
+      setSelectedImage(productImages[Number(selectedImage.id)]);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (selectedImage.id === "1") {
+      setSelectedImage(productImages[3]);
+    } else {
+      setSelectedImage(productImages[Number(selectedImage.id) - 2]);
+    }
+  };
+
   return (
     <>
       <div
@@ -78,12 +97,30 @@ function ProductImageGallery(props: any) {
         }`}
       >
         <div className={`mb-[2rem]`}>
-          <img
-            onClick={handleEnlargeClick}
-            src={selectedImage.image.large.url}
-            className={"rounded-xl cursor-pointer"}
-            alt={selectedImage.name}
-          />
+          <div className="relative">
+            <img
+              onClick={handleEnlargeClick}
+              src={selectedImage.image.large.url}
+              className={"rounded-xl cursor-pointer"}
+              alt={selectedImage.name}
+            />
+            {props.isPop && (
+              <>
+                <button
+                  onClick={handleNext}
+                  className="absolute flex items-center justify-center bg-white rounded-full size-[3rem] -right-[1.5rem] top-[14rem]"
+                >
+                  <NextButton />
+                </button>
+                <button
+                  onClick={handlePrevious}
+                  className="absolute flex items-center justify-center bg-white rounded-full size-[3rem] -left-[1.5rem] top-[14rem]"
+                >
+                  <PreviousButton />
+                </button>
+              </>
+            )}
+          </div>
         </div>
         <div
           className={`flex flex-row justify-between ${
@@ -105,7 +142,13 @@ function ProductImageGallery(props: any) {
           className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80"
           onClick={handleClose}
         >
-          <div onClick={handlePropagation}>
+          <div onClick={handlePropagation} className="relative">
+            <button
+              onClick={handleClose}
+              className="absolute right-[4rem] top-[2rem]"
+            >
+              <CloseButton />
+            </button>
             <ProductImageGallery isPop={true} selectedImage={selectedImage} />
           </div>
         </div>
