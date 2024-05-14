@@ -13,8 +13,11 @@ function Nav() {
     <>
       <div className="flex justify-between pb-8">
         <div className="flex flex-row">
-          <img className="object-scale-down mr-4" src="images\icon-menu.svg" />
-          <img className="object-scale-down mr-8" src="images\logo.svg" />
+          <img
+            className="object-scale-down mr-4"
+            src="./images/icon-menu.svg"
+          />
+          <img className="object-scale-down mr-8" src="./images/logo.svg" />
           <div className="flex flex-row">
             {navButtons.map((item, index) => (
               <NavButton key={index} label={item.label} />

@@ -17,8 +17,10 @@ export interface ImageDTO {
 
 function ProductImageGallery(props: any) {
   function handleImageClick(value: ImageDTO) {
-    setSelectedImage(value);
+    const index = productImages.findIndex((img) => img.id === value.id);
+    setSelectedImageIndex(index);
   }
+
   let productImages: ImageDTO[] = [
     {
       id: "1",
@@ -54,8 +56,8 @@ function ProductImageGallery(props: any) {
     },
   ];
 
-  const [selectedImage, setSelectedImage] = useState(
-    props.selectedImage ? props.selectedImage : productImages[0]
+  const [selectedImageIndex, setSelectedImageIndex] = useState(
+    props.selectedImageIndex ? props.selectedImageIndex : 0
   );
   const [isEnlarged, setIsEnlarged] = useState(false);
 
@@ -74,18 +76,18 @@ function ProductImageGallery(props: any) {
   };
 
   const handleNext = () => {
-    if (selectedImage.id === "4") {
-      setSelectedImage(productImages[0]);
+    if (selectedImageIndex + 1 === productImages.length) {
+      setSelectedImageIndex(0);
     } else {
-      setSelectedImage(productImages[Number(selectedImage.id)]);
+      setSelectedImageIndex((prevState: number) => prevState + 1);
     }
   };
 
   const handlePrevious = () => {
-    if (selectedImage.id === "1") {
-      setSelectedImage(productImages[3]);
+    if (selectedImageIndex === 0) {
+      setSelectedImageIndex(productImages.length - 1);
     } else {
-      setSelectedImage(productImages[Number(selectedImage.id) - 2]);
+      setSelectedImageIndex((prevState: number) => prevState - 1);
     }
   };
 
@@ -100,9 +102,9 @@ function ProductImageGallery(props: any) {
           <div className="relative">
             <img
               onClick={handleEnlargeClick}
-              src={selectedImage.image.large.url}
+              src={productImages[selectedImageIndex].image.large.url}
               className={"rounded-xl cursor-pointer"}
-              alt={selectedImage.name}
+              alt={productImages[selectedImageIndex].name}
             />
             {props.isPop && (
               <>
@@ -132,7 +134,7 @@ function ProductImageGallery(props: any) {
               handlePicture={handleImageClick}
               image={item}
               key={index}
-              selectedPicture={selectedImage}
+              selectedPicture={productImages[selectedImageIndex]}
             />
           ))}
         </div>
@@ -149,7 +151,10 @@ function ProductImageGallery(props: any) {
             >
               <CloseButton />
             </button>
-            <ProductImageGallery isPop={true} selectedImage={selectedImage} />
+            <ProductImageGallery
+              isPop={true}
+              selectedImageIndex={selectedImageIndex}
+            />
           </div>
         </div>
       )}
