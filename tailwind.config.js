@@ -7,6 +7,7 @@ export default {
       transparent: "transparent",
       current: "currentColor",
       white: "#ffffff",
+      black: "rgb(0 0 0)",
 
       orange: "hsl(26, 100%, 55%)",
       "pale-orange": "hsl(25, 100%, 94%)",

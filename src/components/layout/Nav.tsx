@@ -53,7 +53,11 @@ function Nav() {
 
           <img
             className="object-scale-down size-12 rounded-full border-2 border-transparent cursor-pointer transition-colors hover:border-orange"
-            src="images\image-avatar.png"
+            src="./images/icon-cart.svg"
+          />
+          <img
+            className="object-scale-down size-12"
+            src="./images/image-avatar.png"
           />
         </div>
       </nav>
