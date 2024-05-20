@@ -4,6 +4,7 @@ import NextButton from "../shared/buttons/NextButton";
 import PreviousButton from "../shared/buttons/PreviousButton";
 import CloseButton from "../shared/buttons/CloseButton";
 import useScreenSize from "../hook/useScreenSize";
+import React from "react";
 interface LinkDTO {
   id: string;
   url: string;
@@ -111,7 +112,7 @@ function ProductImageGallery(props: any) {
         <div className={`mb-[2rem] relative`}>
           <div>
             <img
-              onClick={mobileScreen && handleEnlargeClick}
+              onClick={mobileScreen ? handleEnlargeClick : undefined}
               src={productImages[selectedImageIndex].image.large.url}
               className={`cursor-pointer ${
                 !mobileScreen ? "rounded-none" : "rounded-xl"
