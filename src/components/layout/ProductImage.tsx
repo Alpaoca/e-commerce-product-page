@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductThumbnail from "../shared/buttons/ProductThumbnail";
 import NextButton from "../shared/buttons/NextButton";
 import PreviousButton from "../shared/buttons/PreviousButton";
 import CloseButton from "../shared/buttons/CloseButton";
-
+import useScreenSize from "../hook/useScreenSize";
+import React from "react";
 interface LinkDTO {
   id: string;
   url: string;
@@ -56,10 +57,20 @@ function ProductImageGallery(props: any) {
     },
   ];
 
+  const screenSize = useScreenSize();
+
+  const mobileScreen = screenSize.height >= 620 && screenSize.width >= 500;
+
   const [selectedImageIndex, setSelectedImageIndex] = useState(
     props.selectedImageIndex ? props.selectedImageIndex : 0
   );
   const [isEnlarged, setIsEnlarged] = useState(false);
+
+  useEffect(() => {
+    if (!mobileScreen) {
+      setIsEnlarged(false);
+    }
+  }, [mobileScreen]);
 
   const handleEnlargeClick = () => {
     if (!props.isPop) {
@@ -94,29 +105,39 @@ function ProductImageGallery(props: any) {
   return (
     <>
       <div
-        className={`h-[30rem] w-[25rem] m-[4rem] ${
-          props.isPop && "h-[40rem] w-[30rem]"
-        }`}
+        className={`w-[25rem] ${
+          !mobileScreen ? "h-[0rem] m-[0rem] w-full" : "m-[4rem] h-[30rem]"
+        } ${props.isPop && "h-[40rem] w-[30rem]"}`}
       >
-        <div className={`mb-[2rem]`}>
-          <div className="relative">
+        <div className={`mb-[2rem] relative`}>
+          <div>
             <img
-              onClick={handleEnlargeClick}
+              onClick={mobileScreen ? handleEnlargeClick : undefined}
               src={productImages[selectedImageIndex].image.large.url}
-              className={"rounded-xl cursor-pointer"}
+              className={`cursor-pointer ${
+                !mobileScreen ? "rounded-none" : "rounded-xl"
+              }`}
               alt={productImages[selectedImageIndex].name}
             />
-            {props.isPop && (
+            {(props.isPop || !mobileScreen) && (
               <>
                 <button
                   onClick={handleNext}
-                  className="absolute flex items-center justify-center bg-white rounded-full size-[3rem] -right-[1.5rem] top-[14rem]"
+                  className={`absolute flex items-center justify-center bg-white rounded-full ${
+                    mobileScreen
+                      ? "-right-[1.5rem] top-[14rem] size-[3rem]"
+                      : "right-[0.5rem] top-[50%] translate-y-[-50%] size-[2.5rem]"
+                  }`}
                 >
                   <NextButton />
                 </button>
                 <button
                   onClick={handlePrevious}
-                  className="absolute flex items-center justify-center bg-white rounded-full size-[3rem] -left-[1.5rem] top-[14rem]"
+                  className={`absolute flex items-center justify-center bg-white rounded-full ${
+                    mobileScreen
+                      ? "-left-[1.5rem] top-[14rem] size-[3rem]"
+                      : "left-[0.5rem] top-[50%] translate-y-[-50%] size-[2.5rem]"
+                  }`}
                 >
                   <PreviousButton />
                 </button>
@@ -124,20 +145,22 @@ function ProductImageGallery(props: any) {
             )}
           </div>
         </div>
-        <div
-          className={`flex flex-row justify-between ${
-            props.isPop && "mx-[2rem]"
-          }`}
-        >
-          {productImages.map((item, index) => (
-            <ProductThumbnail
-              handlePicture={handleImageClick}
-              image={item}
-              key={index}
-              selectedPicture={productImages[selectedImageIndex]}
-            />
-          ))}
-        </div>
+        {mobileScreen && (
+          <div
+            className={`flex flex-row justify-between ${
+              props.isPop && "mx-[2rem]"
+            }`}
+          >
+            {productImages.map((item, index) => (
+              <ProductThumbnail
+                handlePicture={handleImageClick}
+                image={item}
+                key={index}
+                selectedPicture={productImages[selectedImageIndex]}
+              />
+            ))}
+          </div>
+        )}
       </div>
       {isEnlarged && (
         <div
