@@ -12,7 +12,7 @@ function NavButton(props: NavButtonProps) {
         onClick={() => {
           props.onClick?.(props);
         }}
-        className={`flex mx-4 cursor-pointer items-start ${
+        className={`flex mx-4 mt-[1rem] cursor-pointer items-start ${
           props.selectedBtn?.label === props.label
             ? "border-b-4 border-orange text-very-dark-blue"
             : "border-transparent text-dark-grayish-blue"

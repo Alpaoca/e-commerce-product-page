@@ -6,7 +6,7 @@ import {
 } from "@floating-ui/react";
 import { useState } from "react";
 
-function CartButton() {
+function CartButton(prop: any) {
   const [isOpen, setIsOpen] = useState(false);
 
   const { refs, floatingStyles, context } = useFloating({
@@ -31,7 +31,11 @@ function CartButton() {
           className="inline object-scale-down cursor-pointer"
           src="images\icon-cart.svg"
         />
-        <span className="bg-orange font-bold text-light-grayish-blue px-1.5 text-xsm rounded-lg absolute bottom-7 -right-1.5 ">
+        <span
+          className={`bg-orange font-bold text-light-grayish-blue px-1.5 text-xsm rounded-lg absolute -right-1.5 ${
+            prop.mobileScreen && "bottom-[1.75rem]"
+          }`}
+        >
           0
         </span>
         {isOpen && (
