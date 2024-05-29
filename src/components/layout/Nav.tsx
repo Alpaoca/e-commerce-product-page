@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavButton, { NavButtonProps } from "../shared/buttons/NavButton";
 import CartButton from "../shared/buttons/CartButton";
 import useScreenSize from "../hook/useScreenSize";
@@ -14,19 +14,35 @@ function Nav() {
 
   const [selectedBtn, setSelectedBtn] = useState();
 
+  const [selectedBurgerMenu, setSelectedBurgerMenu] = useState(false);
+
   const screenSize = useScreenSize();
 
   const mobileScreen = screenSize.height >= 620 && screenSize.width >= 500;
+
+  useEffect(() => {
+    if (mobileScreen) {
+      setSelectedBurgerMenu(false);
+    }
+  }, [mobileScreen]);
 
   function handleBtn(btn: NavButtonProps) {
     setSelectedBtn(btn);
   }
 
+  function handleBurgerMenu() {
+    setSelectedBurgerMenu((prevState) => !prevState);
+  }
+
   return (
     <>
-      {/* {!mobileScreen && (
+      {selectedBurgerMenu && (
         <div className="fixed top-0 left-0 h-full w-[10rem] z-99 bg-white shadow-2xl p-4 z-10">
-          <button type="button" className="flex justify-start">
+          <button
+            type="button"
+            onClick={handleBurgerMenu}
+            className="flex justify-start"
+          >
             <img className="object-scale-down" src="images\icon-close.svg" />
           </button>
           <ul className="mt-[3rem]">
@@ -37,20 +53,29 @@ function Nav() {
             ))}
           </ul>
         </div>
-      )} */}
+      )}
       <nav
-        className={`flex justify-between items-start mx-[1rem] mt-[3rem] ${
-          !mobileScreen && "mb-[1rem]"
+        className={`flex justify-between items-start mx-[1rem] ${
+          !mobileScreen ? "mb-[1rem] mt-[1rem]" : "mt-[2rem]"
         }`}
       >
         <div className="flex flex-row items-start">
           {!mobileScreen && (
-            <button type="button" className="mr-4 mt-1">
-              <img className="object-scale-down" src="images\icon-menu.svg" />
+            <button
+              type="button"
+              onClick={handleBurgerMenu}
+              className="mr-4 mt-1"
+            >
+              <img
+                className="object-scale-down mt-[0.25rem]"
+                src="images\icon-menu.svg"
+              />
             </button>
           )}
           <img
-            className={`object-scale-down mr-8 ${mobileScreen && "mt-[1rem]"}`}
+            className={`object-scale-down mr-8 ${
+              mobileScreen ? "mt-[1rem]" : "mt-[0.25rem]"
+            }`}
             src="images\logo.svg"
           />
           {mobileScreen && (
