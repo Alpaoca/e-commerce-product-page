@@ -34,24 +34,37 @@ function Nav() {
     setSelectedBurgerMenu((prevState) => !prevState);
   }
 
+  const handlePropagation = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+  };
+
   return (
     <>
       {selectedBurgerMenu && (
-        <div className="fixed top-0 left-0 h-full w-[10rem] z-99 bg-white shadow-2xl p-4 z-10">
-          <button
-            type="button"
-            onClick={handleBurgerMenu}
-            className="flex justify-start"
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 z-[10]"
+          onClick={handleBurgerMenu}
+        >
+          <div
+            className="fixed top-0 left-0 h-full w-[10rem] bg-white shadow-2xl p-4"
+            onClick={handlePropagation}
           >
-            <img className="object-scale-down" src="images\icon-close.svg" />
-          </button>
-          <ul className="mt-[3rem]">
-            {navButtons.map((item) => (
-              <li className="my-4 text-left font-kumbh-sans font-bold">
-                {item.label}
-              </li>
-            ))}
-          </ul>
+            <button
+              type="button"
+              onClick={handleBurgerMenu}
+              className="flex justify-start mt-[0.25rem]"
+            >
+              <img className="object-scale-down" src="images\icon-close.svg" />
+            </button>
+            <ul className="mt-[3rem]">
+              {navButtons.map((item) => (
+                // eslint-disable-next-line react/jsx-key
+                <li className="my-4 text-left font-kumbh-sans font-bold">
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       )}
       <nav
@@ -92,10 +105,10 @@ function Nav() {
           )}
         </div>
         <div className="flex">
-          <CartButton mobileScreen="mobileScreen" />
+          <CartButton setSelectedBurgerMenu={setSelectedBurgerMenu} />
           <img
-            className={`object-scale-down ${
-              mobileScreen ? "size-12" : "size-8"
+            className={`object-scale-down cursor-pointer hover:border-orange rounded-full border-2 border-transparent ${
+              mobileScreen ? "size-12" : "size-9"
             }`}
             src="./images/image-avatar.png"
           />

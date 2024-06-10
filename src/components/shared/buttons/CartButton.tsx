@@ -1,49 +1,45 @@
-import {
-  useFloating,
-  useClick,
-  useInteractions,
-  useDismiss,
-} from "@floating-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useScreenSize from "../../hook/useScreenSize";
 
 function CartButton(prop: any) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { refs, floatingStyles, context } = useFloating({
-    open: isOpen,
-    onOpenChange: setIsOpen,
-  });
-  const click = useClick(context);
-  const dismiss = useDismiss(context, {
-    outsidePressEvent: "mousedown",
-  });
-  const { getReferenceProps, getFloatingProps } = useInteractions([
-    click,
-    dismiss,
-  ]);
+  const screenSize = useScreenSize();
+
+  const mobileScreen = screenSize.height >= 620 && screenSize.width >= 500;
+
+  function handleClick() {
+    setIsOpen((prevState) => !prevState);
+  }
+
+  useEffect(() => {
+    if (prop.setSelectedBurgerMenu === true) {
+      setIsOpen(false);
+    }
+  }, [prop.setSelectedBurgerMenu]);
 
   return (
     <>
       <div className="flex relative mx-8">
         <img
-          ref={refs.setReference}
-          {...getReferenceProps()}
           className="inline object-scale-down cursor-pointer"
+          onClick={handleClick}
           src="images\icon-cart.svg"
         />
         <span
           className={`bg-orange font-bold text-light-grayish-blue px-1.5 text-xsm rounded-lg absolute -right-1.5 ${
-            prop.mobileScreen && "bottom-[1.75rem]"
+            mobileScreen ? "bottom-[1.75rem]" : "bottom-[1.25rem]"
           }`}
         >
           0
         </span>
         {isOpen && (
           <div
-            ref={refs.setFloating}
-            style={floatingStyles}
-            {...getFloatingProps()}
-            className="w-80 bg-white rounded shadow-2xl"
+            className={` bg-white rounded shadow-2xl z-[9] ${
+              mobileScreen
+                ? "absolute w-[20rem] -left-[10rem] top-[4rem] "
+                : "fixed w-[98%] top-[4.25rem] -left-[0rem] m-[0.25rem] "
+            }`}
           >
             <p className="text-left font-bold m-4">Cart</p>
             <hr className="border-grayish-blue" />
