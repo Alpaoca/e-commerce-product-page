@@ -1,8 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      white: "#ffffff",
+      black: "rgb(0 0 0)",
+
       orange: "hsl(26, 100%, 55%)",
       "pale-orange": "hsl(25, 100%, 94%)",
       "very-dark-blue": "hsl(220, 13%, 13%)",
@@ -11,6 +17,7 @@ export default {
       "light-grayish-blue": "hsl(223, 64%, 98%)",
     },
     fontSize: {
+      xsm: "0.6rem",
       sm: "1rem",
     },
     fontFamily: {
