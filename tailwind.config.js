@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -16,6 +17,7 @@ export default {
       "light-grayish-blue": "hsl(223, 64%, 98%)",
     },
     fontSize: {
+      xsm: "0.6rem",
       sm: "1rem",
     },
     fontFamily: {

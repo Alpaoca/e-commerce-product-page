@@ -105,17 +105,17 @@ function ProductImageGallery(props: any) {
   return (
     <>
       <div
-        className={`w-[25rem] ${
+        className={`w-[25rem] relative ${
           !mobileScreen ? "h-[0rem] m-[0rem] w-full" : "m-[4rem] h-[30rem]"
         } ${props.isPop && "h-[40rem] w-[30rem]"}`}
       >
-        <div className={`mb-[2rem] relative`}>
+        <div className={`mb-[2rem] relative `}>
           <div>
             <img
               onClick={mobileScreen ? handleEnlargeClick : undefined}
               src={productImages[selectedImageIndex].image.large.url}
-              className={`cursor-pointer ${
-                !mobileScreen ? "rounded-none" : "rounded-xl"
+              className={`cursor-pointer  ${
+                !mobileScreen ? "rounded-none z-[8]" : "rounded-xl"
               }`}
               alt={productImages[selectedImageIndex].name}
             />
@@ -164,7 +164,7 @@ function ProductImageGallery(props: any) {
       </div>
       {isEnlarged && (
         <div
-          className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80"
+          className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-[10]"
           onClick={handleClose}
         >
           <div onClick={handlePropagation} className="relative">
