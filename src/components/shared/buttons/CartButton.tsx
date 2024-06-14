@@ -24,7 +24,7 @@ function CartButton(prop: any) {
         <img
           className="inline object-scale-down cursor-pointer"
           onClick={handleClick}
-          src="images\icon-cart.svg"
+          src="./images/icon-cart.svg"
         />
         <span
           className={`bg-orange font-bold text-light-grayish-blue px-1.5 text-xsm rounded-lg absolute -right-1.5 ${
