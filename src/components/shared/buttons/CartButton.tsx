@@ -38,7 +38,7 @@ function CartButton(prop: any) {
             className={` bg-white rounded shadow-2xl z-[9] ${
               mobileScreen
                 ? "absolute w-[20rem] -left-[10rem] top-[4rem] "
-                : "fixed w-[98%] top-[4.25rem] -left-[0rem] m-[0.25rem] "
+                : "absolute top-[3.75rem] w-[93vw] -right-[5rem] m-[0.25rem] "
             }`}
           >
             <p className="text-left font-bold m-4">Cart</p>

@@ -106,15 +106,15 @@ function ProductImageGallery(props: any) {
     <>
       <div
         className={`w-[25rem] relative ${
-          !mobileScreen ? "h-[0rem] m-[0rem] w-full" : "m-[4rem] h-[30rem]"
+          !mobileScreen ? "m-[0rem] w-full" : "m-[4rem] h-[30rem]"
         } ${props.isPop && "h-[40rem] w-[30rem]"}`}
       >
         <div className={`mb-[2rem] relative `}>
-          <div>
+          <div className="">
             <img
               onClick={mobileScreen ? handleEnlargeClick : undefined}
               src={productImages[selectedImageIndex].image.large.url}
-              className={`cursor-pointer  ${
+              className={`cursor-pointer ${
                 !mobileScreen ? "rounded-none z-[8]" : "rounded-xl"
               }`}
               alt={productImages[selectedImageIndex].name}
