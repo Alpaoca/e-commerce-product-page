@@ -1,19 +1,30 @@
-import { useState } from "react";
+import { useAppSelector, useAppDispatch } from "../../../store/hook";
+import {
+  incrementAmount,
+  decrementAmount,
+} from "../../../store/shoppingItemSlice";
 
 function AmountButton() {
-  const [quantity, setQuantity] = useState(0);
+  const amount = useAppSelector((state) => state.shoppingItem.amount);
+  const dispatch = useAppDispatch();
 
   return (
     <>
       <div className="bg-light-grayish-blue flex flex-row justify-between rounded-lg h-[3.5rem]">
-        <button className="w-[2rem] flex justify-center items-center">
-          <img src="./images/icon-minus.svg" />
+        <button
+          className="w-[2rem] flex justify-center items-center"
+          onClick={() => dispatch(decrementAmount())}
+        >
+          <img src="./images/icon-minus.svg" alt="Decrease" />
         </button>
         <div className="flex justify-center items-center font-bold px-[1.75rem]">
-          {quantity}
+          {amount}
         </div>
-        <button className="w-[2rem] flex justify-center items-center">
-          <img src="./images/icon-plus.svg" />
+        <button
+          className="w-[2rem] flex justify-center items-center"
+          onClick={() => dispatch(incrementAmount())}
+        >
+          <img src="./images/icon-plus.svg" alt="Increase" />
         </button>
       </div>
     </>

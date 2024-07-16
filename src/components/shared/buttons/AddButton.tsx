@@ -1,7 +1,21 @@
+import { useAppDispatch, useAppSelector } from "../../../store/hook";
+import { setCart, setCartAmount } from "../../../store/shoppingItemSlice";
+
 function AddButton() {
+  const dispatch = useAppDispatch();
+  const amount = useAppSelector((state) => state.shoppingItem.amount);
+
+  function handleClick() {
+    dispatch(setCart(true));
+    dispatch(setCartAmount(amount));
+  }
+
   return (
     <>
-      <div className="bg-orange flex flex-row justify-center items-center rounded-lg h-[3.5rem] w-full shadow-[0_1.5rem_1rem] shadow-pale-orange cursor-pointer">
+      <div
+        className="bg-orange flex flex-row justify-center items-center rounded-lg h-[3.5rem] w-full shadow-[0_1.5rem_1rem] shadow-pale-orange cursor-pointer"
+        onClick={() => handleClick()}
+      >
         <svg
           width="22"
           height="20"

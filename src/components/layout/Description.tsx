@@ -55,6 +55,7 @@ function Description() {
               : "grid grid-rows-2 gap-2"
           }`}
         >
+          {" "}
           <AmountButton />
           <AddButton />
         </div>
