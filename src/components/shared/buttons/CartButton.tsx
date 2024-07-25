@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import useScreenSize from "../../hook/useScreenSize";
 import { useAppSelector } from "../../../store/hook";
 import DeleteButton from "./DeleteButton";
+import useMobileScreen from "../../hook/useMobileScreen";
 
 function CartButton(prop: any) {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,9 +9,7 @@ function CartButton(prop: any) {
 
   const cartAmount = useAppSelector((state) => state.shoppingItem.cartAmount);
 
-  const screenSize = useScreenSize();
-
-  const mobileScreen = screenSize.height >= 620 && screenSize.width >= 500;
+  const mobileScreen = useMobileScreen();
 
   useEffect(() => {
     if (cartAmount > 0) {

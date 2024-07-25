@@ -3,7 +3,7 @@ import ProductThumbnail from "../shared/buttons/ProductThumbnail";
 import NextButton from "../shared/buttons/NextButton";
 import PreviousButton from "../shared/buttons/PreviousButton";
 import CloseButton from "../shared/buttons/CloseButton";
-import useScreenSize from "../hook/useScreenSize";
+import useMobileScreen from "../hook/useMobileScreen";
 import React from "react";
 interface LinkDTO {
   id: string;
@@ -57,14 +57,12 @@ function ProductImageGallery(props: any) {
     },
   ];
 
-  const screenSize = useScreenSize();
-
-  const mobileScreen = screenSize.height >= 620 && screenSize.width >= 500;
-
   const [selectedImageIndex, setSelectedImageIndex] = useState(
     props.selectedImageIndex ? props.selectedImageIndex : 0
   );
   const [isEnlarged, setIsEnlarged] = useState(false);
+
+  const mobileScreen = useMobileScreen();
 
   useEffect(() => {
     if (!mobileScreen) {

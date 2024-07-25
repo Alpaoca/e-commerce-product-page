@@ -1,17 +1,13 @@
 import AddButton from "../shared/buttons/AddButton";
 import AmountButton from "../shared/buttons/AmountButton";
-import useScreenSize from "../hook/useScreenSize";
+import useMobileScreen from "../hook/useMobileScreen";
 
 function Description() {
-  const screenSize = useScreenSize();
-
-  const mobileScreen = screenSize.height >= 620 && screenSize.width >= 500;
-
   return (
     <>
       <div
         className={`flex flex-col h-[30rem] ${
-          mobileScreen
+          useMobileScreen()
             ? "w-[25rem] m-[4rem] justify-evenly "
             : "w-100% mx-[1rem] gap-1"
         }`}
@@ -30,7 +26,7 @@ function Description() {
         <div>
           <div
             className={`flex  ${
-              mobileScreen ? "flex-col" : "justify-between items-center"
+              useMobileScreen() ? "flex-col" : "justify-between items-center"
             }`}
           >
             <div className="flex flex-row">
@@ -50,7 +46,7 @@ function Description() {
         </div>
         <div
           className={` ${
-            mobileScreen
+            useMobileScreen()
               ? "h-[3.5rem] grid grid-cols-[1fr_2fr] items-center gap-4"
               : "grid grid-rows-2 gap-2"
           }`}

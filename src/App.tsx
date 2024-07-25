@@ -2,12 +2,11 @@ import "./App.css";
 import Description from "./components/layout/Description";
 import Nav from "./components/layout/Nav";
 import ProductImage from "./components/layout/ProductImage";
-import useScreenSize from "./components/hook/useScreenSize";
+import useMobileScreen from "./components/hook/useMobileScreen";
 
 function App() {
-  const screenSize = useScreenSize();
+  const mobileScreen = useMobileScreen();
 
-  const mobileScreen = screenSize.height >= 620 && screenSize.width >= 500;
   return (
     <>
       <Nav />
