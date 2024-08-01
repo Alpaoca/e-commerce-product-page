@@ -11,7 +11,7 @@ interface ShoppingItemState {
 
 const initialState: ShoppingItemState = {
   name: "",
-  amount: 0,
+  amount: 1,
   price: 0,
   total: 0,
   cart: false,
@@ -38,13 +38,16 @@ const shoppingItemSlice = createSlice({
       state.total = state.amount * state.price;
     },
     decrementAmount: (state) => {
-      state.amount = Math.max(0, state.amount - 1);
+      state.amount = Math.max(1, state.amount - 1);
       state.total = state.amount * state.price;
     },
     setCart: (state, action: PayloadAction<boolean>) => {
       state.cart = action.payload;
     },
     setCartAmount: (state, action: PayloadAction<number>) => {
+      state.cartAmount = state.cartAmount + action.payload;
+    },
+    resetAmount: (state, action: PayloadAction<number>) => {
       state.cartAmount = action.payload;
     },
   },
@@ -58,6 +61,7 @@ export const {
   decrementAmount,
   setCart,
   setCartAmount,
+  resetAmount,
 } = shoppingItemSlice.actions;
 
 export default shoppingItemSlice.reducer;
