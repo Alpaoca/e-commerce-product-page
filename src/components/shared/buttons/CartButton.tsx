@@ -7,8 +7,6 @@ function CartButton(prop: any) {
   const [isOpen, setIsOpen] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);
 
-  const [isPressed, setIsPressed] = useState(false);
-
   const cartAmount = useAppSelector((state) => state.shoppingItem.cartAmount);
 
   const mobileScreen = useMobileScreen();
@@ -89,14 +87,8 @@ function CartButton(prop: any) {
                   <DeleteButton />
                 </div>
                 <button
-                  className={`bg-orange font-bold text-light-grayish-blue rounded-[8px] h-[3rem] w-full ${
-                    isPressed ? "bg-dark-orange" : "bg-orange hover:opacity-80"
-                  }`}
-                  onMouseDown={() => setIsPressed(true)}
-                  onMouseUp={() => setIsPressed(false)}
-                  onMouseLeave={() => setIsPressed(false)}
-                  onTouchStart={() => setIsPressed(true)}
-                  onTouchEnd={() => setIsPressed(false)}
+                  className={`bg-orange font-bold text-light-grayish-blue rounded-[8px] h-[3rem] w-full active:bg-dark-orange hover:opacity-80
+                  `}
                 >
                   Checkout
                 </button>

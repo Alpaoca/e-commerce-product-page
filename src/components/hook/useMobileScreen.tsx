@@ -27,7 +27,7 @@ const useScreenSize = () => {
 
 const useMobileScreen = () => {
   const screenSize = useScreenSize();
-  return screenSize.height >= 620 && screenSize.width >= 500;
+  return screenSize.height >= 640 || screenSize.width >= 340;
 };
 
 export default useMobileScreen;

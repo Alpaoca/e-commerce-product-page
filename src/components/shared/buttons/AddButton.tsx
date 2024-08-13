@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
 import { setCart, setCartAmount } from "../../../store/shoppingItemSlice";
 
 function AddButton() {
   const dispatch = useAppDispatch();
   const amount = useAppSelector((state) => state.shoppingItem.amount);
-  const [isPressed, setIsPressed] = useState(false);
 
   function handleClick() {
     dispatch(setCart(true));
@@ -15,15 +13,8 @@ function AddButton() {
   return (
     <>
       <button
-        className={` flex flex-row justify-center items-center rounded-lg h-[3.5rem] w-full shadow-[0_1.5rem_1rem] shadow-pale-orange cursor-pointer  ${
-          isPressed ? "bg-dark-orange" : "bg-orange hover:opacity-80"
-        } `}
+        className={` flex flex-row justify-center items-center rounded-lg h-[3.5rem] w-full shadow-[0_1.5rem_1rem] shadow-pale-orange cursor-pointer bg-orange active:bg-dark-orange  hover:opacity-80 `}
         onClick={() => handleClick()}
-        onMouseDown={() => setIsPressed(true)}
-        onMouseUp={() => setIsPressed(false)}
-        onMouseLeave={() => setIsPressed(false)}
-        onTouchStart={() => setIsPressed(true)}
-        onTouchEnd={() => setIsPressed(false)}
       >
         <svg
           width="22"
