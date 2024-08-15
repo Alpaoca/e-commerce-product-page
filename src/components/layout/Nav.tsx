@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import NavButton, { NavButtonProps } from "../shared/buttons/NavButton";
 import CartButton from "../shared/buttons/CartButton";
-import useScreenSize from "../hook/useScreenSize";
+import useMobileScreen from "../hook/useMobileScreen";
 
 function Nav() {
   let navButtons: NavButtonProps[] = [
@@ -16,9 +16,7 @@ function Nav() {
 
   const [selectedBurgerMenu, setSelectedBurgerMenu] = useState(false);
 
-  const screenSize = useScreenSize();
-
-  const mobileScreen = screenSize.height >= 620 && screenSize.width >= 500;
+  const mobileScreen = useMobileScreen();
 
   useEffect(() => {
     if (mobileScreen) {

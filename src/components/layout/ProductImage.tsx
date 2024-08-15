@@ -3,7 +3,7 @@ import ProductThumbnail from "../shared/buttons/ProductThumbnail";
 import NextButton from "../shared/buttons/NextButton";
 import PreviousButton from "../shared/buttons/PreviousButton";
 import CloseButton from "../shared/buttons/CloseButton";
-import useScreenSize from "../hook/useScreenSize";
+import useMobileScreen from "../hook/useMobileScreen";
 import React from "react";
 interface LinkDTO {
   id: string;
@@ -57,14 +57,12 @@ function ProductImageGallery(props: any) {
     },
   ];
 
-  const screenSize = useScreenSize();
-
-  const mobileScreen = screenSize.height >= 620 && screenSize.width >= 500;
-
   const [selectedImageIndex, setSelectedImageIndex] = useState(
     props.selectedImageIndex ? props.selectedImageIndex : 0
   );
   const [isEnlarged, setIsEnlarged] = useState(false);
+
+  const mobileScreen = useMobileScreen();
 
   useEffect(() => {
     if (!mobileScreen) {
@@ -106,15 +104,15 @@ function ProductImageGallery(props: any) {
     <>
       <div
         className={`w-[25rem] relative ${
-          !mobileScreen ? "h-[0rem] m-[0rem] w-full" : "m-[4rem] h-[30rem]"
+          !mobileScreen ? "m-[0rem] w-full" : "m-[4rem] h-[30rem]"
         } ${props.isPop && "h-[40rem] w-[30rem]"}`}
       >
         <div className={`mb-[2rem] relative `}>
-          <div>
+          <div className="">
             <img
               onClick={mobileScreen ? handleEnlargeClick : undefined}
               src={productImages[selectedImageIndex].image.large.url}
-              className={`cursor-pointer  ${
+              className={`cursor-pointer ${
                 !mobileScreen ? "rounded-none z-[8]" : "rounded-xl"
               }`}
               alt={productImages[selectedImageIndex].name}
