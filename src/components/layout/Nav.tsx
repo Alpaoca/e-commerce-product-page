@@ -12,7 +12,7 @@ function Nav() {
     { label: "Contact" },
   ];
 
-  const [selectedBtn, setSelectedBtn] = useState();
+  const [selectedBtn, setSelectedBtn] = useState<NavButtonProps | null>(null);
 
   const [selectedBurgerMenu, setSelectedBurgerMenu] = useState(false);
 
@@ -95,7 +95,7 @@ function Nav() {
                 <NavButton
                   key={index}
                   label={item.label}
-                  selectedBtn={selectedBtn}
+                  selectedBtn={selectedBtn || undefined}
                   onClick={handleBtn}
                 />
               ))}
