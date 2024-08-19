@@ -2,7 +2,7 @@
   "name": "base-react-app",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://github.com/Alpaoca/e-commerce-product-page/",
+  "homepage": "https://alpaoca.github.io/e-commerce-product-page",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
