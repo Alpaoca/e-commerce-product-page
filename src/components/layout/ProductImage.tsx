@@ -27,8 +27,8 @@ function ProductImageGallery(props: any) {
       id: "1",
       name: "product-1",
       image: {
-        small: { id: "1a", url: "./images/image-product-1-thumbnail.jpg" },
-        large: { id: "1b", url: "./images/image-product-1.jpg" },
+        small: { id: "1-a", url: "./images/image-product-1-thumbnail.jpg" },
+        large: { id: "1-b", url: "./images/image-product-1.jpg" },
       },
     },
     {
